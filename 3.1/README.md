@@ -1,6 +1,6 @@
 - linux内核编译与安装
   - 选择内核版本6.10
-  - 编译
+  - 编译  
     <img src="./linux内核编译完毕’.png">
   - 安装
     <img src="./linux内核安装完成.png">
