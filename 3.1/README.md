@@ -16,7 +16,7 @@
   - 重新编译内核
     - 按照bcc对内核模块的要求，对比当前内核配置，可以发现需要更改flag:CONFIG_IKHEADER为添加至内核中
     - 更改.config后重新编译
-      <img src="kernel_new运行成功.png">
+      <img src="kernel-new运行成功.png">
     - 可以在新内核的配置文件·config-6.10.0-new·中看到新的内核是含有CONFIG_IKHEADER=y的
       <img src="ikheader开启.png">
   - 编译bcc
