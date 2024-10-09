@@ -1,2 +1,4 @@
-part A
-part B
+- part A
+  - 代码见csim.c
+  - long.trace的验证
+- part B
