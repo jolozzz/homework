@@ -51,6 +51,7 @@
     ```
 
     对于64/*64的矩阵转置，还需考虑分块内set冲突的问题。使用4\*4的分块可以消除块内set冲突的问题。
+    （还想到一种方法可以降低cache miss，有时间我会写下来┑ (￣Д ￣)┍）
     ```
     int temp1,temp2,temp3,temp4;
 
@@ -65,11 +66,10 @@
                 B[j+1][ii] = temp2;
                 B[j+2][ii] = temp3;
                 B[j+3][ii] = temp4;
-                // for(int jj=j;jj<j+4;jj++){
-                //     B[jj][ii] = A[ii][jj];
-                // }
             }
         }
     }
     //cache miss为1700
     ```
+
+    对于61\*67的矩阵转置
