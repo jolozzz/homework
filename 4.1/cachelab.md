@@ -50,4 +50,26 @@
     //cache miss为288
     ```
 
-    对于64/*64的矩阵转置，还需考虑分块内set冲突的问题。
+    对于64/*64的矩阵转置，还需考虑分块内set冲突的问题。使用4\*4的分块可以消除块内set冲突的问题。
+    ```
+    int temp1,temp2,temp3,temp4;
+
+    for(int i = 0;i<N;i+=4){
+        for(int j=0;j<M;j+=4){
+            for(int ii=i;ii<i+4;ii++){
+                temp1 = A[ii][j];
+                temp2 = A[ii][j+1];
+                temp3 = A[ii][j+2];
+                temp4 = A[ii][j+3];
+                B[j][ii] = temp1;
+                B[j+1][ii] = temp2;
+                B[j+2][ii] = temp3;
+                B[j+3][ii] = temp4;
+                // for(int jj=j;jj<j+4;jj++){
+                //     B[jj][ii] = A[ii][jj];
+                // }
+            }
+        }
+    }
+    //cache miss为1700
+    ```
