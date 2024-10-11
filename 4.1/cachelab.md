@@ -72,4 +72,19 @@
     //cache miss为1700
     ```
 
-    对于61\*67的矩阵转置
+    对于61\*67的矩阵转置，直接分块即可达成要求
+    ```
+    const int blockN = 16;
+    const int blockM = 16;
+
+    for(int i=0;i<N;i+=blockN){
+        for(int j=0;j<M;j+=blockM){
+            for(int ii=i;ii<(N<i+blockN ? N : i+blockN);ii++){
+                for(int jj=j;jj<(M<j+blockM ? M : j+blockM);jj++){
+                    B[jj][ii] = A[ii][jj];
+                }
+            }
+        }
+    }
+    //cache miss为1993
+    ```
