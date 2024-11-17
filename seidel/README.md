@@ -1,8 +1,8 @@
 seidel-2d算子优化记录  
 规模n=2000，step=2000
 
-- baseline: 109.0s
-  -O0
+- baseline: 109.0s  
+  - cppflag:-O0
   ```
   int t, i, j;
     
@@ -16,7 +16,7 @@ seidel-2d算子优化记录
   ```
 
 - 前缀和：20.4s
-  -O3
+  - cppflag:-O3
   ```
   const double _1_d_9 = 1.0/9.0;
   double const1[8];
