@@ -15,7 +15,7 @@ seidel-2d算子优化记录
   }
   ```
 
-- 前缀和：20.4s
+- 前缀和：19.6s
   - cppflag:-O3 -fno-tree-vectorize -march=native （这里O3自向量化了前缀和）
   ```
   const double _1_d_9 = 1.0/9.0;
