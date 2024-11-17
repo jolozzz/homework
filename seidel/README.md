@@ -1,5 +1,6 @@
 seidel-2d算子优化记录  
 规模n=2000，step=2000
+平台：thxy
 
 - baseline: 109.0s  
   - cppflag:-O0
