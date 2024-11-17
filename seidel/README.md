@@ -53,7 +53,7 @@ seidel-2d算子优化记录
       }
   }
   ```
-- 前缀和 + avx512：28.0s
+- 前缀和 + avx512：26.0s
   - cppflag： —O3 -march=native
   ```
   const double _1_d_9 = 1.0/9.0;
