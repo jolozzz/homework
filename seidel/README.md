@@ -16,7 +16,7 @@ seidel-2d算子优化记录
   ```
 
 - 前缀和：20.4s
-  - cppflag:-O3
+  - cppflag:-O3 （这里O3自向量化了前缀和）
   ```
   const double _1_d_9 = 1.0/9.0;
   double const1[8];
@@ -52,3 +52,4 @@ seidel-2d算子优化记录
       }
   }
   ```
+  
