@@ -17,7 +17,7 @@ seidel-2d算子优化记录
   ```
 
 - 前缀和：15.8s
-  - cppflag:-O3 -fno-tree-vectorize -march=native （这里O3自向量化了前缀和）
+  - cppflag:-O3 （这里O3自向量化了前缀和）(不知道为什么这里用-march=native自动上AVX2会比SSE慢)
   ```
   const double _1_d_9 = 1.0/9.0;
   double const1[8];
