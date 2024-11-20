@@ -52,7 +52,7 @@ seidel-2d算子优化记录
       }
   }
   ```
-- 前缀和 + avx512：22.0s
+- 前缀和 + avx512：18.7s
   - cppflag： —O3 -mavx512f
   ```
   const double _1_d_9 = 1.0/9.0;
