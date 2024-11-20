@@ -53,8 +53,8 @@ seidel-2d算子优化记录
       }
   }
   ```
-- 前缀和 + avx512：26.0s
-  - cppflag： —O3 -march=native
+- 前缀和 + avx512：22.0s
+  - cppflag： —O3 -mavx512f
   ```
   const double _1_d_9 = 1.0/9.0;
   double const1[8];
@@ -88,14 +88,15 @@ seidel-2d算子优化记录
               //     temp += v[k];
               // }
               __m512d vec_v = _mm512_loadu_pd(v);//vec_v = 1,2,3,4,5,6,7,8
-              __m512d vec_t1 = _mm512_permute_pd(vec_v,0b10101010);//vec_t1 = 2,1,4,3,6,5,8,7
+              __m512d vec_t1 = _mm512_permute_pd(vec_v,0b01010101);//vec_t1 = 2,1,4,3,6,5,8,7
               __m512d vec_t2 = _mm512_add_pd(vec_v,vec_t1);//vec_t2 = 12,12,34,34,56,56,78,78
               vec_v = _mm512_mask_add_pd(vec_v,musk1,vec_v,vec_t1);//vec_v = 1,12,3,34,5,56,7,78
               __m512d vec_t3 = _mm512_permutex_pd(vec_t2,musk2);//vec_t3 = 34,34,12,12,78,78,56,56
               __m512d vec_t4 = _mm512_add_pd(vec_t2,vec_t3);//vec_t4 = 1234,1234,1234,1234,5678,5678,5678,5678
               vec_v = _mm512_mask_add_pd(vec_v,musk3,vec_v,vec_t3);//vec_v = 1,12,123,1234,5,56,567,5678
               __m512d vec_t5 = _mm512_shuffle_f64x2(vec_t4,vec_t4,musk2);//vec_t5 = 5678,5678,5678,5678,1234,1234,1234,1234
-              vec_v = _mm512_mask_add_pd(vec_v,musk3,vec_v,vec_t5);
+              vec_v = _mm512_mask_add_pd(vec_v,musk4,vec_v,vec_t5);//vec_v = 1,12,123,1234,12345,123456,1234567,12345678
+              vec_v = _mm512_mul_pd(vec_v,vec_const2);
               _mm512_storeu_pd(&A[i][j*8+1],vec_v);
           }
           for(int jj=j*8+1;jj<=n-2;jj++){
