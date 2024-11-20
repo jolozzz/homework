@@ -74,12 +74,11 @@ seidel-2d算子优化记录
       for(int i=1;i<n-1;i++){
           int j=0;
           for(;(j+1)*8<n-2;j++){
-              v[0] = A[i - 1][j*8] + A[i - 1][j*8+1] + A[i - 1][j*8+2] + A[i][j*8] + A[i][j*8+1] + A[i][j*8+2] + A[i + 1][j*8] + A[i + 1][j*8+1] + A[i + 1][j*8+2];
-              v[0]*=const1[0];
-              for(int k=1;k<8;k++){
+              for(int k=0;k<8;k++){
                   v[k] = A[i - 1][j*8+k] + A[i - 1][j*8+1+k] + A[i - 1][j*8+2+k] + A[i][j*8+1+k] + A[i][j*8+2+k] + A[i + 1][j*8+k] + A[i + 1][j*8+1+k] + A[i + 1][j*8+2+k];
                   v[k]*=const1[k];
               }
+              v[0]+=A[i][j*8];
               //计算前缀和
               // double temp=0;
               // for(int k=0;k<8;k++){
