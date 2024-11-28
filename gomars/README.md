@@ -67,3 +67,5 @@
     set(CMAKE_C_COMPILER mpicc)
     set(CMAKE_C_FLAGS "-O3 -xHost")
     ```
+- baseline:66s
+  c移植:53s
