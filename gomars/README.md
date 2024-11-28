@@ -17,5 +17,10 @@
       end subroutine
     end interface
     ```
+    定义一个接口，通过接口传递fortran中变量的指针
+    ```
+    call func_c(x%d(is,js,ks),x_d_dim1,x_d_dim2,k_step,j_step,i_step,filter%ngrid_lon(js),tmp(is),filter%wgt_lon(1,js),wgt_dim1)
+    ```
+    直接调用子程序
   - c代码怎么写
   - 如何编译
