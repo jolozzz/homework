@@ -57,3 +57,14 @@
     }
     ```
   - 如何编译
+    fortran和c的库之间可以直接链接，直接更改cmake使其支持c语言即可（gomars的cmake已经把c编译器检查及使用相关给写好了）
+    ```
+    target_sources(gmcore PRIVATE
+      ...
+      src/dynamics/filter_run_2d.c
+    )
+    ```
+    ```
+    set(CMAKE_C_COMPILER mpicc)
+    set(CMAKE_C_FLAGS "-O3 -xHost")
+    ```
