@@ -67,5 +67,31 @@
     set(CMAKE_C_COMPILER mpicc)
     set(CMAKE_C_FLAGS "-O3 -xHost")
     ```
-- baseline:66s
+- baseline:66s  
   c移植:53s
+- 向量化：56s
+  ```
+  for (int k=0;k<(*k_step);k++){
+    for(int j=0;j<(*j_step);j++){
+        n = *(ngrid+j);
+        if(n>1){
+            hn = (n - 1) / 2;
+            for(int i=0;i<*i_step;i++){
+                int h=0;
+                __m512d temp0 = _mm512_setzero_pd();
+                for(;h+8<n;h+=8){
+                    __m512d temp1 = _mm512_loadu_pd(wgt + j*(*wgt_dim1) + h);
+                    __m512d temp2 = _mm512_loadu_pd(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i+h-hn);
+                    temp0 = _mm512_fmadd_pd(temp1,temp2,temp0);
+                }
+                *(temp+i)+=_mm512_reduce_add_pd(temp0);
+                for(;h<8;h++){
+                    *(temp+i) += (*(wgt + j*(*wgt_dim1) + h))*(*(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i+h-hn));
+                }
+            }
+            for(int i=0;i<(*i_step);i++){
+                *(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i) = *(temp+i);
+            }
+        }
+    }
+  ```
