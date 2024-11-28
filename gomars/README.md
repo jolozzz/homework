@@ -35,8 +35,7 @@
         int n,hn;
     
         for (int k=0;k<(*k_step);k++){
-            for(int j=0;j<(*j_step);j++){\
-                //printf("%d ",n);
+            for(int j=0;j<(*j_step);j++){
                 n = *(ngrid+j);
                 if(n>1){
                     hn = (n - 1) / 2;
