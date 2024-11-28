@@ -54,6 +54,7 @@ seidel-2d算子优化记录
   ```
 - 前缀和 + avx512：18.7s
   - cppflag： —O3 -mavx512f
+  进一步的优化还可以包括对齐64位使用load取数，用float计算迭代的前一部分等等
   ```
   const double _1_d_9 = 1.0/9.0;
   double const1[8];
