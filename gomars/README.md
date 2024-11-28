@@ -23,4 +23,37 @@
     ```
     直接调用子程序
   - c代码怎么写
+    ```
+    #include<stdio.h>
+    void func_c_(double *x_d,int *x_d_dim1,int *x_d_dim2,
+                 int *k_step,int *j_step,int *i_step,
+                 int *ngrid,
+                 double *temp,
+                 double* wgt,int *wgt_dim1){
+        //printf("c : %lld  %03.15lE\n",(long long int)(x_d),*(x_d));
+    
+        int n,hn;
+    
+        for (int k=0;k<(*k_step);k++){
+            for(int j=0;j<(*j_step);j++){\
+                //printf("%d ",n);
+                n = *(ngrid+j);
+                if(n>1){
+                    hn = (n - 1) / 2;
+                    for(int i=0;i<(*i_step);i++){
+                        *(temp+i) = 0;
+                        for(int h=0;h<n;h++){
+                            //*(temp+i) += wgt[j][h]*x_d[k][j][i-hn+h];
+                            *(temp+i) += (*(wgt + j*(*wgt_dim1) + h))*(*(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i+h-hn));
+                        }
+                    }
+                    for(int i=0;i<(*i_step);i++){
+                        //x_d[k][j][i] = temp[i];
+                        *(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i) = *(temp+i);
+                    }
+                }
+            }
+        }
+    }
+    ```
   - 如何编译
