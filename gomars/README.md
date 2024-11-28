@@ -84,7 +84,7 @@
                     __m512d temp2 = _mm512_loadu_pd(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i+h-hn);
                     temp0 = _mm512_fmadd_pd(temp1,temp2,temp0);
                 }
-                *(temp+i)+=_mm512_reduce_add_pd(temp0);
+                *(temp+i)=_mm512_reduce_add_pd(temp0);
                 for(;h<n;h++){
                     *(temp+i) += (*(wgt + j*(*wgt_dim1) + h))*(*(x_d + k*(*x_d_dim2)*(*x_d_dim1) + j*(*x_d_dim1) + i+h-hn));
                 }
